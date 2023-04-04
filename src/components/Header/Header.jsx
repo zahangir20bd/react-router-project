@@ -1,9 +1,10 @@
 import React from "react";
+import NavBar from "./NavBar";
 
 const Header = () => {
   return (
-    <div>
-      <h3>This message from header</h3>
+    <div className="mx-auto">
+      <NavBar />
     </div>
   );
 };

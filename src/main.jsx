@@ -5,19 +5,40 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
+import Blogs from "./components/BLogs/Blogs";
+import Friends from "./components/Friends/Friends";
+import FriendDetails from "./components/FriendDetails/FriendDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <Home />,
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Blogs />,
+      },
+      {
+        path: "friends",
+        element: <Friends />,
+        loader: () => fetch("https://jsonplaceholder.typicode.com/users"),
+      },
+      {
+        path: "friend/:friendID",
+        element: <FriendDetails />,
+        loader: ({ params }) =>
+          fetch(
+            `https://jsonplaceholder.typicode.com/users/${params.friendID}`
+          ),
       },
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
       },
     ],
   },
